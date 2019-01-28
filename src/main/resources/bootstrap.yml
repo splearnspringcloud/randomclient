@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: randomclient
+  cloud:
+    config:
+      uri: https://spconfigserver.herokuapp.com/
