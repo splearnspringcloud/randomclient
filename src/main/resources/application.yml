@@ -2,3 +2,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${eurekahost}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'hystrix.stream'

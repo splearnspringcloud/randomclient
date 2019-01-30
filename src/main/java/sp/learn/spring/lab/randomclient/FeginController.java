@@ -1,11 +1,10 @@
 package sp.learn.spring.lab.randomclient;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "fegin")
@@ -18,6 +17,14 @@ public class FeginController {
     @GetMapping(path = "/")
     public String get() {
         return randomServer.get();
+    }
+
+    @GetMapping(path = "/hystrix/")
+    @HystrixCommand(fallbackMethod = "getFallback")
+    public String getHys() {return randomServer.get(); }
+
+    private String getFallback() {
+        return "Random Server Not Available";
     }
 }
 
