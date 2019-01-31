@@ -2,6 +2,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${eurekahost}
+  instance:
+    hostname: ${HOST_NAME}
+    nonSecurePort: 80
 management:
   endpoints:
     web:
