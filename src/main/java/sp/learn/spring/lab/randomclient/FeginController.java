@@ -16,15 +16,17 @@ public class FeginController {
 
     @GetMapping(path = "/")
     public String get() {
-        return randomServer.get();
+        return String.format("Random Client Fegin - %s", randomServer.get());
     }
 
     @GetMapping(path = "/hystrix/")
     @HystrixCommand(fallbackMethod = "getFallback")
-    public String getHys() {return randomServer.get(); }
+    public String getHys() {
+        return String.format("Random Client Fegin Hystrix - %s", randomServer.get());
+    }
 
     private String getFallback() {
-        return "Random Server Not Available";
+        return "Random Server Not Available!";
     }
 }
 
